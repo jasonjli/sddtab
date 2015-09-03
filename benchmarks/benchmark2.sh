@@ -9,6 +9,16 @@ OUTPUT=$4
 MAX=$5
 TIMEOUT=$6
 
+if [[ `uname` == 'Linux' ]]
+then
+export TIMEOUT_FUNC = timeout
+fi
+
+if [[ `uname` == 'Darwin' ]]
+then
+export TIMEOUT_FUNC = gtimeout
+fi
+
 for BENCH_DIR in $LOGIC_DIR/*
 do
 	if [[ -d $BENCH_DIR ]] #&& $(basename $BENCH_DIR) == "s4_t4p_n" ]]
@@ -17,7 +27,7 @@ do
 		ERROR=0
 		for i in {1..$MAX}
 		do
-			RES_STRING=$(gtimeout "$TIMEOUT"s zsh -c "cat $BENCH_DIR/$i.txt.k | $SOLVER $SOLVER_ARGS")
+			RES_STRING=$(timeout "$TIMEOUT"s zsh -c "cat $BENCH_DIR/$i.txt.k | $SOLVER $SOLVER_ARGS")
 			STAT=$?
 			if [[ $STAT == 0 ]]
 			then

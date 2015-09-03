@@ -11,3 +11,6 @@ Enter 'make' in terminal within the sddtab directory.
 Linux:
 Install g++ (sudo apt-get install g++);
 Enter 'make' in terminal within the sddtab directory.
+
+To run benchmark:
+Enter 'run_all_benchmark.sh' in the sddtab directory.
